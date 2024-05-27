@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify
 from services.pdf_service import extract_text_from_pdf
 from services.chatgpt_service import get_chatgpt_response
+from services.json_service import load_json_to_string
 
 app = Flask(__name__)
 
@@ -26,8 +27,10 @@ def extract_text():
             if response_type == 'raw-text':
                 return jsonify({'raw_text': text})
             elif response_type == 'ai-processed-json-obj':
-                # TODO: provide with an uniform model class to map to
-                prompt = str("Please take the text input provided and convert it into a valid JSON format. Ensure to remove any escape characters and format it properly for readability. The text should be structured to reflect hierarchical data if necessary. The text: " + text)
+                         
+                jsonFormat = str(load_json_to_string("misc/userResume.json"))
+                
+                prompt = str(f"Please take the text from an resume input provided and convert it into a valid JSON format in this format {jsonFormat}. Ensure to remove any escape characters and format it properly for readability. The text should be structured to reflect hierarchical data if necessary. The text: {text}")
                 chatgpt_response = get_chatgpt_response(prompt)
                 return jsonify({'ai_processed_response': chatgpt_response})
             else:

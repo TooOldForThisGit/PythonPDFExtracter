@@ -24,7 +24,7 @@
         ],
         "skills": [
           {
-            "level": 3, // Level of skill, ranging from 0 (none) to 3 (highly proficient)
+            "level": 3,
             "numberOfDaysWorkExperience": 1095,
             "keyword": {
               "masterSynonym": "JavaScript"
