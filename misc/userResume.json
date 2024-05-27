@@ -1,0 +1,44 @@
+{
+    "workExperience": [
+      {
+        "startDate": "2022-06-01T00:00:00",
+        "endDate": "2022-12-01T00:00:00",
+        "translations": [
+          {
+            "employer": "Company Name",
+            "title": "Job Title",
+            "description": "Job Description",
+            "profileTranslation": {
+              "languageBranch": {
+                "id": 1,
+                "language": {
+                  "languageId": 714,
+                  "name": "Svenska",
+                  "culture": "sv-SE",
+                  "lang": "sv",
+                  "country": "SE"
+                }
+              }
+            }
+          }
+        ],
+        "skills": [
+          {
+            "level": 3, // Level of skill, ranging from 0 (none) to 3 (highly proficient)
+            "numberOfDaysWorkExperience": 1095,
+            "keyword": {
+              "masterSynonym": "JavaScript"
+            }
+          }
+        ]
+      }
+    ],
+    "presentation": {
+      "translations": [
+        {
+          "language": "en",
+          "content": "Professional summary or personal statement here."
+        }
+      ]
+    }
+  }
