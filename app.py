@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from services.pdf_service import extract_text_from_pdf
 from services.chatgpt_service import get_chatgpt_response
 from services.json_service import load_json_to_string
+from helpers.string_handlers import clean_chars_from_string, extract_json_object
 
 app = Flask(__name__)
 
@@ -32,7 +33,14 @@ def extract_text():
                 
                 prompt = str(f"Please take the text from an resume input provided and convert it into a valid JSON format in this format {jsonFormat}. Ensure to remove any escape characters and format it properly for readability. The text should be structured to reflect hierarchical data if necessary. The text: {text}")
                 chatgpt_response = get_chatgpt_response(prompt)
-                return jsonify({'ai_processed_response': chatgpt_response})
+                
+                try:
+                    clean_json = clean_chars_from_string(chatgpt_response, '\\n', '\\')
+                    json_object = extract_json_object(clean_json)
+                except ValueError as e:
+                    print(f"Error: {e}")
+                
+                return jsonify({'ai_processed_response': json_object})
             else:
                 return jsonify({'error': 'Invalid response_type specified'}), 400
 
